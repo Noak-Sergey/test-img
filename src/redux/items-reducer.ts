@@ -16,34 +16,34 @@ const initialState = {
 type ItemsStateType = {
     items: ItemType[]
     pageSize: number
-    totalItemsCount:number
-    currentPage:number
+    totalItemsCount: number
+    currentPage: number
 }
-    
-export const itemsReducer = (state:ItemsStateType = initialState, action:ActionsType):ItemsStateType => {
+
+export const itemsReducer = (state: ItemsStateType = initialState, action: ActionsType): ItemsStateType => {
     switch (action.type) {
         case SET_ITEMS:
-            return {...state, items: action.items}   
+            return { ...state, items: action.items }
         case SET_TOTAL_ITEMS_COUNT:
-            return {...state, totalItemsCount: action.totalCount}
+            return { ...state, totalItemsCount: action.totalCount }
         case SET_CURRENT_PAGE:
-            return {...state, currentPage: action.currentPage}
-            default:
-                return state
+            return { ...state, currentPage: action.currentPage }
+        default:
+            return state
     }
 }
 
 //actions
-export const setItemsAC = (items:ItemType[]) => ({type:SET_ITEMS, items} as const)
-export const setTotalItemsCountAC = (totalCount: number) => ({type: SET_TOTAL_ITEMS_COUNT, totalCount} as const)
-export const setCurrentPageAC = (currentPage: number) => ({type:SET_CURRENT_PAGE , currentPage} as const)
+export const setItemsAC = (items: ItemType[]) => ({ type: SET_ITEMS, items } as const)
+export const setTotalItemsCountAC = (totalCount: number) => ({ type: SET_TOTAL_ITEMS_COUNT, totalCount } as const)
+export const setCurrentPageAC = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const)
 
 //thunks
 export const fetchItemsImgTC = () => {
-    return async (dispatch:Dispatch<ActionsType>) => {
+    return async (dispatch: Dispatch<ActionsType>) => {
         let res = await itemsAPI.getImg()
-        dispatch(setItemsAC(res.data)) 
-        dispatch(setTotalItemsCountAC(res.data.length))          
+        dispatch(setItemsAC(res.data))
+        dispatch(setTotalItemsCountAC(res.data.length))
     }
 }
 

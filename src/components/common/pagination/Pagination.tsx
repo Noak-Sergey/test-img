@@ -12,7 +12,7 @@ export const Pagination = (props: PaginationPropsType) => {
 
     let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize)
     let pages: number[] = []
-    for(let i = 1; i <= pagesCount; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
@@ -23,15 +23,15 @@ export const Pagination = (props: PaginationPropsType) => {
 
     return <div className={s.pagination}>
 
-            {portionNumber > 1 && <button onClick={() => setPortionNumber(portionNumber - 1)}>PREV</button>}
+        {portionNumber > 1 && <button onClick={() => setPortionNumber(portionNumber - 1)}>PREV</button>}
 
-            {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber )
-                    .map(p => {
-                        return <span className={props.currentPage === p ? s.selectedPage : s.pageNumber}
-                        key={p}
-                        onClick={() => {props.onPageChanged(p)}}>{p}</span>
-                    })}
+        {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+            .map(p => {
+                return <span className={props.currentPage === p ? s.selectedPage : s.pageNumber}
+                    key={p}
+                    onClick={() => { props.onPageChanged(p) }}>{p}</span>
+            })}
 
-                    {portionCount > portionNumber && <button onClick={() => setPortionNumber(portionNumber + 1)}>NEXT</button>}
+        {portionCount > portionNumber && <button onClick={() => setPortionNumber(portionNumber + 1)}>NEXT</button>}
     </div>
 }
