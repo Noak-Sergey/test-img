@@ -8,9 +8,6 @@ import { Item, ItemType } from "./Item"
 
 export const Items = () => {
 
-  const arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-  const[value, onChangeOption] = useState(arr[0])
-
   const dispatch = useDispatch()
 
   const allItems = useSelector<RootStateType, ItemType[]>(state => state.itemsPage.items)
@@ -23,6 +20,13 @@ export const Items = () => {
     dispatch(thunk)
   }, [])
 
+  const arrAlbumId = allItems.map(i => i.albumId)
+  const arrFilter = arrAlbumId.filter((item, pos) => arrAlbumId.indexOf(item) == pos)
+  const arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+  // const arrToString = arrFilter.map(i => String(i))  при переводе этого массива чисел в строки, в useState value почему-то undefined
+  // const arr = arrToString
+  const[value, onChangeOption] = useState<string>(arr[0])
+
   const onPageChanged = (pageNumber: number) => {
     dispatch(setCurrentPageAC(pageNumber))
   }
@@ -32,9 +36,8 @@ export const Items = () => {
   const sizeRender = pageSize * currentPage
   const renderItemsImg = selectedItems.slice(0, sizeRender)
 
-debugger
   return <div>
-      <CustomSelect
+      AlbumId : <CustomSelect
                     options={arr}
                     value={value}
                     onChangeOption={onChangeOption}
