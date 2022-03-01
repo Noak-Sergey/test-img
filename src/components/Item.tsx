@@ -18,12 +18,15 @@ export const Item = (props: ItemPropsType) => {
 
     const [show, setShow] = useState(false)
 
-    
-    return <div>
-        <div>
-            <img alt="error load image" src={props.item.thumbnailUrl} className={s.itemImg} />
+
+    return (
+        <div className={s.item}>
+            <span>{props.item.albumId}</span>
+            <div>
+                <img alt="error load image" src={props.item.thumbnailUrl} className={s.itemImg} />
+            </div>
+            <Modal onClose={() => setShow(false)} show={show} url={props.item.url} />
+            <button className={s.button} onClick={() => setShow(true)}>DELETE</button>
         </div>
-        <Modal onClose={()=> setShow(false)} show={show} url={props.item.url}/>
-        <button onClick={()=> setShow(true)}>DELETE</button>
-    </div>
+    )
 }

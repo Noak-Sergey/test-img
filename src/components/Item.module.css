@@ -1,4 +1,12 @@
-.itemImg {
-    cursor: pointer;
+.item{
+    /* display: flex; */
+    margin: 30px auto;
+}
+.itemImg {   
     margin: 10px 10px;
+}
+
+.button {
+    cursor: pointer;
+    height: 20px;
 }

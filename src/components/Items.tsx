@@ -1,14 +1,19 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchItemsImgTC, setCurrentPageAC } from "../redux/items-reducer"
 import { RootStateType } from "../redux/store"
 import { Pagination } from "./common/Pagination/Pagination"
+import { CustomSelect } from "./common/Select/Select"
 import { Item, ItemType } from "./Item"
 
-export const Items: React.FC = () => {
+export const Items = () => {
+
+  const arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+  const[value, onChangeOption] = useState(arr[0])
+
   const dispatch = useDispatch()
 
-  const itemsImg = useSelector<RootStateType, ItemType[]>(state => state.itemsPage.items)
+  const allItems = useSelector<RootStateType, ItemType[]>(state => state.itemsPage.items)
   const pageSize = useSelector<RootStateType, number>(state => state.itemsPage.pageSize)
   const totalItemsCount = useSelector<RootStateType, number>(state => state.itemsPage.totalItemsCount)
   const currentPage = useSelector<RootStateType, number>(state => state.itemsPage.currentPage)
@@ -22,12 +27,18 @@ export const Items: React.FC = () => {
     dispatch(setCurrentPageAC(pageNumber))
   }
 
+  const selectedItems = allItems.filter(i => i.albumId === +value)
+
   const sizeRender = pageSize * currentPage
-  const renderItemsImg = itemsImg.slice(0, sizeRender)
+  const renderItemsImg = selectedItems.slice(0, sizeRender)
 
-
+debugger
   return <div>
-
+      <CustomSelect
+                    options={arr}
+                    value={value}
+                    onChangeOption={onChangeOption}
+                />
     <div>
       {renderItemsImg.map(item => <Item key={item.id} item={{
         albumId: item.albumId,
