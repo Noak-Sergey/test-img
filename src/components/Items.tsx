@@ -7,6 +7,7 @@ import { CustomSelect } from "./common/Select/Select"
 import { Item, ItemType } from "./Item"
 
 export const Items = () => {
+  
 
   const dispatch = useDispatch()
 
@@ -22,10 +23,10 @@ export const Items = () => {
 
   const arrAlbumId = allItems.map(i => i.albumId)
   const arrFilter = arrAlbumId.filter((item, pos) => arrAlbumId.indexOf(item) == pos)
-  const arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-  // const arrToString = arrFilter.map(i => String(i))  при переводе этого массива чисел в строки, в useState value почему-то undefined
-  // const arr = arrToString
-  const[value, onChangeOption] = useState<string>(arr[0])
+  //const arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+   const arrToString = arrFilter.map(i => i.toString())  //при переводе этого массива чисел в строки, в useState value почему-то undefined
+   const arr = arrToString
+  const[value, onChangeOption] = useState<string>(arr[0]) //при первой загрузке value = undefined и не отображаются картинки, при выборе альбома картинки загружаются
 
   const onPageChanged = (pageNumber: number) => {
     dispatch(setCurrentPageAC(pageNumber))
