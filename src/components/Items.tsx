@@ -17,8 +17,8 @@ export const Items = () => {
   const currentPage = useSelector<RootStateType, number>(state => state.itemsPage.currentPage)
 
   useEffect(() => {
-    const thunk = fetchItemsImgTC()
-    dispatch(thunk)
+    //const thunk = fetchItemsImgTC()
+    dispatch(fetchItemsImgTC())
   }, [])
 
   const arrAlbumId = allItems.map(i => i.albumId)

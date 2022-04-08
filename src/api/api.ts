@@ -8,6 +8,7 @@ const instance = axios.create({
 
 export const itemsAPI = {
     getImg() {
-        return instance.get<ItemType[]>(`/photos`)    
+        return instance.get<ItemType[]>(`/photos`)          
     }, 
 }
+
