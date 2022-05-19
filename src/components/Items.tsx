@@ -8,25 +8,23 @@ import { Item, ItemType } from "./Item"
 
 export const Items = () => {
   
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchItemsImgTC())
+  }, [])
 
   const allItems = useSelector<RootStateType, ItemType[]>(state => state.itemsPage.items)
   const pageSize = useSelector<RootStateType, number>(state => state.itemsPage.pageSize)
   const totalItemsCount = useSelector<RootStateType, number>(state => state.itemsPage.totalItemsCount)
   const currentPage = useSelector<RootStateType, number>(state => state.itemsPage.currentPage)
 
-  useEffect(() => {
-    //const thunk = fetchItemsImgTC()
-    dispatch(fetchItemsImgTC())
-  }, [])
-
   const arrAlbumId = allItems.map(i => i.albumId)
   const arrFilter = arrAlbumId.filter((item, pos) => arrAlbumId.indexOf(item) == pos)
   //const arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
    const arrToString = arrFilter.map(i => i.toString())  //при переводе этого массива чисел в строки, в useState value почему-то undefined
-   const arr = arrToString
-  const[value, onChangeOption] = useState<string>(arr[0]) //при первой загрузке value = undefined и не отображаются картинки, при выборе альбома картинки загружаются
+   
+  const[value, onChangeOption] = useState<string>(arrToString[0]) //при первой загрузке value = undefined и не отображаются картинки, при выборе альбома картинки загружаются
 
   const onPageChanged = (pageNumber: number) => {
     dispatch(setCurrentPageAC(pageNumber))
@@ -39,7 +37,7 @@ export const Items = () => {
 
   return <div>
       AlbumId : <CustomSelect
-                    options={arr}
+                    options={arrToString}
                     value={value}
                     onChangeOption={onChangeOption}
                 />
