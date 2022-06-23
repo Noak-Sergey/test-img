@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchItemsImgTC, setCurrentPageAC } from "../redux/items-reducer"
 import { RootStateType } from "../redux/store"
@@ -21,7 +21,7 @@ export const Items = () => {
 
   const arrAlbumId = allItems.map(i => i.albumId)
   const arrFilter = arrAlbumId.filter((item, pos) => arrAlbumId.indexOf(item) == pos)
-  //const arr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+  
    const arrToString = arrFilter.map(i => i.toString())  //при переводе этого массива чисел в строки, в useState value почему-то undefined
    
   const[value, onChangeOption] = useState<string>(arrToString[0]) //при первой загрузке value = undefined и не отображаются картинки, при выборе альбома картинки загружаются
